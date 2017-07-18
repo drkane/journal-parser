@@ -1,1 +1,1 @@
-web: python journal.py
+web: python journal.py $PORT

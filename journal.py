@@ -4,6 +4,7 @@ import bibtexparser
 import feedparser
 import dateutil.parser
 from bottle import Bottle, run, request
+import sys
 
 
 RSS_KEYS = [
@@ -76,7 +77,14 @@ def journal_issues(publisher, journal):
 
 
 def main():
-    run(app, host='localhost', port=8080, debug=True)
+    port = 8080
+    host = 'localhost'
+    debug = True
+    if len(sys.argv) > 1:
+        port = int(sys.argv[1])
+        host = '0.0.0.0'
+        debug = False
+    run(app, host=host, port=port, debug=debug)
 
 if __name__ == '__main__':
     main()
