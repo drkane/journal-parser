@@ -35,7 +35,8 @@ def get_issue(url, recursive=False):
             a["authors"] = a["author"].split(" and ")
             a["lead_author"] = a["authors"][0]
             a["pages"] = [int(p) for p in a["pages"].split("-")]
-            a["keywords"] = a["keyword"].lower().split(", ")
+            if "keyword" in a:
+                a["keywords"] = a["keyword"].lower().split(", ")
             for i in ["year", "volume", "issue"]:
                 if i in a:
                     a[i] = int(a[i])
