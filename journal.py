@@ -20,7 +20,9 @@ RSS_KEYS = [
 
 def get_issue(url, recursive=False):
     r = requests.get(url, params={"format": "bib"})
-    bib_text = r.text.replace('"\nparent_itemid', '",\nparent_itemid')
+    bib_text = r.text
+    bib_text = bib_text.replace('"\nparent_itemid', '",\nparent_itemid')
+    bib_text = bib_text.replace('"\nauthor', '",\nauthor')
     bib_database = bibtexparser.loads(bib_text)
     articles = bib_database.entries
     if recursive:
@@ -69,8 +71,8 @@ def journal_issues(publisher, journal):
     return {"issues": issues}
 
 
-@app.route('/<publisher>/<journal>/issue')
-def journal_issues(publisher, journal):
+@app.route('/issue')
+def journal_issues():
     url = request.query.link
     articles = get_issue(url, True)
     return {"articles": articles}
