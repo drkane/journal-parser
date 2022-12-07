@@ -1,6 +1,6 @@
 bibtexparser==0.6.2
 bottle==0.12.13
-certifi==2017.4.17
+certifi==2022.12.7
 chardet==3.0.4
 feedparser==5.2.1
 idna==2.5
